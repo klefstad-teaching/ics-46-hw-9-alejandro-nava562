@@ -48,9 +48,10 @@ void print_path(const vector<int>& path, int total) {
         return;
     }
 
+    // Print without "->" and add spaces instead
     for (size_t i = 0; i < path.size(); i++) {
-        if (i > 0) cout << " -> ";
+        if (i > 0) cout << " ";  // Space instead of "->"
         cout << path[i];
     }
-    cout << "\nTotal cost is " << total << endl;
+    cout << " \nTotal cost is " << total << endl;
 }
