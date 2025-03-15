@@ -28,17 +28,19 @@ add_executable(ladder_main
 
 find_package(GTest)
 if (GTest_FOUND)
-  set(STUDENT_TEST_FILES
-    gtest/gtestmain.cpp
+  set(GTEST_FILES
     gtest/student_gtests.cpp
   )
 
-  add_executable(student_gtests 
-    ${STUDENT_TEST_FILES}
+  # Ensure hashtable.cpp and stats.cpp are linked to tests
+  add_executable(student_gtests
+    ${GTEST_FILES}
     ${DIJKSTRAS_SRC_FILES}
     ${LADDER_SRC_FILES}
   )
-  target_include_directories(student_gtests PRIVATE src ${GTEST_INCLUDE_DIRS})
-  target_link_libraries(student_gtests PRIVATE ${GTEST_LIBRARIES})
-endif()
 
+  target_include_directories(student_gtests PRIVATE src ${GTEST_INCLUDE_DIRS})
+  
+  # Proper linking of GTest and pthread
+  target_link_libraries(student_gtests PRIVATE GTest::GTest GTest::Main pthread)
+endif()
