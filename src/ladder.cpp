@@ -48,37 +48,37 @@ void load_words(set<string> &word_list, const string &file_name) {
   }
 }
 
-vector<string> generate_word_ladder(const string &begin_word,
-                                    const string &end_word,
-                                    const set<string> &word_list) {
-  if (begin_word == end_word) {
-    return {begin_word};
-  }
-
-  queue<vector<string>> ladder_queue;
-  ladder_queue.push({begin_word});
-  set<string> visited;
-  visited.insert(begin_word);
-
-  while (!ladder_queue.empty()) {
-    vector<string> ladder = ladder_queue.front();
-    ladder_queue.pop();
-
-    string last_word = ladder.back();
-    for (const string &word : word_list) {
-      if (is_adjacent(last_word, word) && visited.find(word) == visited.end()) {
-        vector<string> new_ladder = ladder;
-        new_ladder.push_back(word);
-        if (word == end_word) {
-          return new_ladder;
-        }
-        ladder_queue.push(new_ladder);
-        visited.insert(word);
-      }
+vector<string> generate_word_ladder(const string& begin_word, const string& end_word, const set<string>& word_list) {
+    if (begin_word == end_word) {
+        return {};  // Return empty vector if start and end words are the same
     }
-  }
-  return {};
+
+    queue<vector<string>> ladder_queue;
+    set<string> visited;
+
+    ladder_queue.push({begin_word});
+    visited.insert(begin_word);
+
+    while (!ladder_queue.empty()) {
+        vector<string> ladder = ladder_queue.front();
+        ladder_queue.pop();
+
+        string last_word = ladder.back();
+        if (last_word == end_word) return ladder;
+
+        for (const string& word : word_list) {
+            if (is_adjacent(last_word, word) && visited.find(word) == visited.end()) {
+                visited.insert(word);
+                vector<string> new_ladder = ladder;
+                new_ladder.push_back(word);
+                ladder_queue.push(new_ladder);
+            }
+        }
+    }
+    return {};
 }
+
+
 
 void print_word_ladder(const vector<string> &ladder) {
   if (ladder.empty()) {
