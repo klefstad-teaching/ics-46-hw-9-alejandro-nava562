@@ -44,10 +44,9 @@ vector<int> extract_shortest_path(const vector<int>& distances, const vector<int
 
 void print_path(const vector<int>& path, int total) {
 
-    // Print without "->" and add spaces instead
     for (size_t i = 0; i < path.size(); i++) {
         if (i > 0) cout << " ";  // Space instead of "->"
         cout << path[i];
     }
-    cout << " \nTotal cost is " << total << "\n";
+    cout << "Total cost is " << total << "\n";
 }
