@@ -49,9 +49,8 @@ vector<int> extract_shortest_path(const vector<int> &distances,
 
 void print_path(const vector<int> &path, int total) {
   for (size_t i = 0; i < path.size(); i++) {
-    cout << path[i] << " "; // Always print a space after each number
+    cout << path[i] << " ";
   }
 
-  cout << "\nTotal cost is " << total
-       << "\n"; // Ensure newline is placed correctly
+  cout << "\nTotal cost is " << total << "\n";
 }
